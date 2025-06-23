@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import { useTheme } from '../context/ThemeContext';
 import { NAV_LINKS } from '../constants';
-import MenuIcon from '../../MenuIcon'; 
+import MenuIcon from '../MenuIcon'; 
 import XIcon from './icons/XIcon'; 
 import CartIcon from './icons/CartIcon'; 
 import ChevronDownIcon from './icons/ChevronDownIcon'; 
