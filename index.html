@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ModernShop Ghana - Your Style, Your Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Set initial theme based on localStorage to prevent FOUC
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    tailwind.config = {
+      darkMode: 'class', // Enable class-based dark mode
+      theme: {
+        extend: {
+          colors: {
+            'deep-purple': '#5B2A86',
+            'electric-orange': '#FF6700',
+            'light-gray': '#F3F4F6', // Used as light mode background
+            'medium-gray': '#D1D5DB',
+            'dark-gray': '#374151',   // Used as light mode text
+            // Dark mode specific colors (can be defined here or use dark: variants)
+            'dm-deep-purple': '#31174A', // Darker purple for dark mode backgrounds
+            'dm-dark-gray': '#1F2937', // Darker gray for primary dark mode background
+            'dm-medium-gray': '#4B5563', // For cards/secondary elements in dark mode
+            'dm-light-gray': '#D1D5DB', // Light gray text for dark mode
+            'dm-lighter-gray': '#9CA3AF', // Lighter gray text for dark mode
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+            montserrat: ['Montserrat', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-out',
+            'slide-in-up': 'slideInUp 0.5s ease-out',
+            'subtle-zoom-pan': 'subtleZoomPan 20s ease-in-out infinite alternate',
+            'pulse-once': 'pulseOnce 1.2s ease-out forwards',
+            'typing': 'typing 2s steps(30, end), blink-caret .75s step-end infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: 0 },
+              '100%': { opacity: 1 },
+            },
+            slideInUp: {
+              '0%': { transform: 'translateY(20px)', opacity: 0 },
+              '100%': { transform: 'translateY(0)', opacity: 1 },
+            },
+            subtleZoomPan: {
+              '0%': { transform: 'scale(1) translateX(0) translateY(0)', 'transform-origin': 'center center' },
+              '25%': { transform: 'scale(1.05) translateX(-2%) translateY(1%)', 'transform-origin': 'bottom left' },
+              '50%': { transform: 'scale(1.1) translateX(0) translateY(0)', 'transform-origin': 'center center' },
+              '75%': { transform: 'scale(1.05) translateX(2%) translateY(-1%)', 'transform-origin': 'top right' },
+              '100%': { transform: 'scale(1) translateX(0) translateY(0)', 'transform-origin': 'center center' },
+            },
+            pulseOnce: {
+              '0%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.05)'},
+              '100%': { transform: 'scale(1)' },
+            },
+            typing: {
+              from: { width: '0' },
+              to: { width: '100%' }
+            },
+            'blink-caret': {
+              'from, to': { borderColor: 'transparent' },
+              '50%': { borderColor: 'orange' }
+            }
+          },
+          boxShadow: {
+            'soft-xl': '0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03)',
+            'soft-2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.1)',
+            'dark-soft-xl': '0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.15)',
+            'dark-soft-2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      -webkit-font-smoothing: antialiased; 
+      -moz-osx-font-smoothing: grayscale; 
+      transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+    .dark body {
+      background-color: #1F2937; /* dm-dark-gray */
+      color: #D1D5DB; /* dm-light-gray */
+    }
+
+    /* Enhanced Floating Label Styles for Light and Dark Mode */
+    .floating-label-input .peer:not(:placeholder-shown) + label,
+    .floating-label-input .peer:focus + label {
+      transform: translateY(-1.4rem) scale(0.75);
+      font-weight: 500;
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+    }
+
+    /* Light Mode Label */
+    .floating-label-input .peer:not(:placeholder-shown) + label {
+      color: #5B2A86; /* deep-purple */
+      background-color: white; 
+    }
+    .floating-label-input .peer:focus + label {
+      color: #FF6700; /* electric-orange for focus */
+      background-color: white;
+    }
+    .floating-label-input .peer:focus {
+        border-color: #5B2A86; /* deep-purple */
+        box-shadow: 0 0 0 1px #5B2A86;
+    }
+    .floating-label-input textarea.peer,
+    .floating-label-input input.peer {
+        background-color: white;
+        color: #374151; /* dark-gray text */
+    }
+
+    /* Dark Mode Label Specifics */
+    .dark .floating-label-input .peer:not(:placeholder-shown) + label {
+      color: #A78BFA; /* Lighter purple for dark mode label */
+      background-color: #374151; /* Match input background in dark mode */
+    }
+    .dark .floating-label-input .peer:focus + label {
+      color: #FF6700; /* electric-orange for focus, stays same */
+      background-color: #374151; 
+    }
+    .dark .floating-label-input .peer:focus {
+        border-color: #A78BFA; 
+        box-shadow: 0 0 0 1px #A78BFA;
+    }
+    .dark .floating-label-input textarea.peer,
+    .dark .floating-label-input input.peer {
+        background-color: #374151; /* Corresponds to dark-gray */
+        color: #D1D5DB; /* dm-light-gray text */
+        border-color: #4B5563; /* dm-medium-gray for border */
+    }
+     .dark .floating-label-input .peer::placeholder {
+        color: #9CA3AF; /* dm-lighter-gray for placeholder */
+    }
+
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@19.1.0",
+    "react-dom/client": "https://esm.sh/react-dom@19.1.0/client",
+    "react-router-dom": "https://esm.sh/react-router-dom@7.6.2",
+    "framer-motion": "https://esm.sh/framer-motion@12.18.1",
+    "react-dom/": "https://esm.sh/react-dom@19.1.0/",
+    "react/": "https://esm.sh/react@19.1.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-light-gray text-dark-gray dark:bg-dm-dark-gray dark:text-dm-light-gray">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
